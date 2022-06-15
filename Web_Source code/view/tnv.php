@@ -15,6 +15,7 @@
         $Email      = test_input($_POST['email']);
         $ID_BP      = $_POST['id_bp'];
         $ID_CV      = $_POST['id_cv'];
+        $Luong      = $_POST['luong'];
         global $pattern_text;
         global $pattern_number;
         $_SESSION['tnvMsg'] = "";
@@ -32,7 +33,7 @@
         }
         if (!empty($Ten)) {
             if (!preg_match($pattern_text,$Ten)) {
-                $_SESSION['tnvMsg']  .= "Tên không được chứa ký tự đặc biệt<br>";
+                $_SESSION['tnvMsg']  .= "Tên không được chứa ký tự đặc biệt hoặc chữ số<br>";
             }
         }
         else{
@@ -63,12 +64,6 @@
              $_SESSION['tnvMsg'] .= "Email bị bỏ trống<br>";
         }
         if ($_SESSION['tnvMsg'] == ""){
-            $sql = "INSERT INTO Tai_khoan (ID, account, password) values ('$ID', '$account', '$password')";
-            if ($connect->query($sql) != TRUE){
-                $_SESSION['tnvMsg']  .= "Lỗi SQL:". $connect->error ."<br>";
-                $_SESSION['tnvMsg']  .= "Thêm nhân viên thất bại";
-                die();
-            }
             $sql2 = "INSERT INTO Danh_sach (
             ID,
             Ho,
@@ -79,7 +74,8 @@
             Gioi_tinh,
             Email,
             ID_BP,
-            ID_CV) values (
+            ID_CV,
+            Luong) values (
             '$ID',
             '$Ho',
             '$Ten',
@@ -89,8 +85,15 @@
             '$Gioi_tinh',
             '$Email',
             '$ID_BP',
-            '$ID_CV')";
+            '$ID_CV',
+            $Luong)";
             if ($connect->query($sql2) != TRUE){
+                $_SESSION['tnvMsg']  .= "Lỗi SQL:". $connect->error ."<br>";
+                $_SESSION['tnvMsg']  .= "Thêm nhân viên thất bại";
+                die();
+            }
+            $sql = "INSERT INTO Tai_khoan (ID, account, password) values ('$ID', '$account', '$password')";
+            if ($connect->query($sql) != TRUE){
                 $_SESSION['tnvMsg']  .= "Lỗi SQL:". $connect->error ."<br>";
                 $_SESSION['tnvMsg']  .= "Thêm nhân viên thất bại";
                 die();
@@ -161,6 +164,7 @@
         ID_BP       = document.getElementById("Bo_phan").value;
         ID_CV       = document.getElementById("Chuc_vu").value;
         Gioi_tinh   = document.querySelector('input[name="Gioi_tinh"]:checked').value;
+        Luong       = document.getElementById("luong").value;
     }
     addForm.onkeyup = function(){
         getValue();
@@ -195,7 +199,8 @@
             dien_thoai  : Dien_thoai,
             email       : Email,
             id_bp       : ID_BP,
-            id_cv       : ID_CV
+            id_cv       : ID_CV,
+            luong       : Luong
         },
         function(data,status){
             if (String(status) == "success"){
@@ -203,6 +208,9 @@
             }
         });
     }
+    var navBar = document.getElementById("main-navbar");
+    var side = String(window.innerHeight-navBar.offsetHeight - 32) + "px";
+    document.getElementsByClassName("card")[0].style.minHeight = side;
 </script>
 
 <div class="modal fade" id="tnvModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -235,7 +243,7 @@
 <div class="card">
 <div class="justify-content-center">
   <form action="" method="POST" class="" id="addForm">
-    <h4 class="text-center p-3">Thêm nhân viên mới</h4>
+    <h4 class="text-center p-3">THÊM NHÂN VIÊN MỚI</h4>
     <div class="row justify-content-center">
       <div class="col-4">
         <p>ID: <strong class="text-danger">*</strong></p>
@@ -366,6 +374,15 @@
             }
           ?>
         </select>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <p>Lương: <strong class="text-danger">*</strong></p>
+      </div>
+    <div class="col-8">
+      <input type="number" id="luong" class="form-control" name="luong"
+        value="0" placeholder="Tiền lương"/>
       </div>
     </div>
     <div class="text-center p-3">

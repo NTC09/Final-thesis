@@ -101,6 +101,9 @@
             }
         });
     }
+    var navBar = document.getElementById("main-navbar");
+    var side = String(window.innerHeight-navBar.offsetHeight - 32) + "px";
+    document.getElementsByClassName("card")[0].style.minHeight = side;
 </script>
 
 <div class="modal fade" id="messModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -129,11 +132,11 @@
   </div>
 </div>
 
-<div class="p-3">
+<div class="p-3 h-100">
 <div class="card">
 <div class="form-signin justify-content-center"> 
   <form action="" method="POST" class="">
-    <h4 class="text-center p-3">Đổi mật khẩu</h4>
+    <h4 class="text-center p-3">ĐỔI MẬT KHẨU</h4>
     <div class="row justify-content-center">
       <div class="col-8 p-1">
         <div class="form-outline">
@@ -178,3 +181,10 @@
   </form>
 </div>
 </div>
+<style>
+@media (min-width: 991.98px) {
+  .hh-100{
+    height:calc(100vh - 92px);
+  }
+}
+</style>

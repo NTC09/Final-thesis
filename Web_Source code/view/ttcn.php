@@ -133,6 +133,9 @@
             myModal.hide();
         }
     }
+    var navBar = document.getElementById("main-navbar");
+    var side = String(window.innerHeight-navBar.offsetHeight - 32) + "px";
+    document.getElementsByClassName("card")[0].style.minHeight = side;
 </script>
 <div class="modal fade" id="messModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -158,14 +161,13 @@
     </div>
   </div>
 </div>
-
 <div class="p-3">
 <div class="card">
-<h4 class="text-center mt-3">Thông tin cá nhân</h4>
+<h4 class="text-center mt-3">THÔNG TIN CÁ NHÂN</h4>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg mt-3">
-      <div class="card">
+    <div class="col-lg mt-3 right-line">
+      <div class="">
       <h5 class="text-center">Thông tin</h5>
         <div class="row justify-content-center">
           <div class="col-3">
@@ -252,7 +254,7 @@
     <!--Second col-------------------------------------------------------------->
     <div class="col-lg mt-3">
       <form action="" method="POST" class="">
-        <div class="card">
+        <div class="">
         <h5 class="text-center">Bảng cập nhật</h5>
         <div class="row justify-content-center">
           <div class="col-3">
@@ -369,3 +371,13 @@
 </div>
 </div>
 </div>
+<style>
+@media (min-width: 991.98px) {
+  .right-line{
+    border-right: 2px solid #ccc;
+  }
+  .hh-100{
+    min-height:calc(100vh - 92px);
+  }
+}
+</style>

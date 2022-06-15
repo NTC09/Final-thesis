@@ -3,7 +3,7 @@
     include "php/loginhandle.php";
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="vi" id="fullpage">
 <head>
     <base target="_parent">
     <link rel="shortcut icon" href="img/logo.png">
@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Font Awesome -->
@@ -24,10 +24,12 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
+    <!--Icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    
     <script type="text/javascript" src="js/script.js"></script>
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -39,48 +41,66 @@
   <nav id="sidebarMenu" class="d-lg-block sidebar bg-white collapse" style="">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
+        <?php if ($_SESSION["Quan_ly"] == true){ ?>
         <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple active" 
-       style="" onclick="loadpage(this.id)" id="spin.php">
-            <i class="fas fa-fw me-3 iconify" data-icon="uiw:dashboard"></i>
+        onclick='loadpage(this.id)' id="view/ql_dashboard.php">
+            <i class="fas fa-fw  fa-solid fa-chart-pie me-3"></i>
+            <span>Admin dashboard</span>
+        </a>
+        <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple" 
+        onclick='loadpage(this.id)' id="view/dashboard.php">
+            <i class="fas fa-fw  fa-solid fa-gauge-high me-3"></i>
             <span>Main dashboard</span>
         </a>
+        <?php } else { ?>
+        <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple active" 
+        onclick='loadpage(this.id)' id="view/dashboard.php">
+            <i class="fas fa-fw  fa-solid fa-gauge-high me-3"></i>
+            <span>Main dashboard</span>
+        </a>
+        <?php } ?>
         <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple"
         onclick="loadpage(this.id)" id="view/bcc.php">
-            <i class="fas fa-fw me-3 iconify" data-icon="bi:calendar-check"></i>
+            <i class="fas fa-fw  fa-solid fa-calendar-days me-3"></i>
             <span>Bảng chấm công</span>
         </a>
         <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple"
         onclick="loadpage(this.id)" id="view/dmk.php">
-            <i class="fas fa-fw me-3 iconify" data-icon="fluent:key-32-regular"></i>
+            <i class="fas fa-fw  fa-solid fa-key me-3"></i>
             <span>Đổi mật khẩu</span>
         </a>
         <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple" style=""
         onclick="loadpage(this.id)" id="view/ttcn.php">
-            <i class="fas fa-fw me-3 iconify" data-icon="gg:info"></i>
+            <i class="fas fa-fw  fa-solid fa-address-card me-3"></i>
             <span>Thông tin cá nhân</span>
         </a>
         <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple"
         onclick="loadpage(this.id)" id="view/dsnv.php">
-            <i class="fas fa-fw me-3 iconify" data-icon="jam:task-list"></i>
+            <i class="fas fa-fw fa-solid fa-address-book me-3"></i>
             <span>Danh sách nhân viên</span>
         </a>
         <?php if(isset( $_SESSION["Quan_ly"]) && $_SESSION["Quan_ly"] == true){ ?>
         <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple"
         onclick="loadpage(this.id)" id="view/qlnv.php">
-            <i class="fas fa-fw me-3 iconify" data-icon="eos-icons:admin-outlined"></i>
+            <i class="fas fa-fw  fa-solid fa-bars-progress me-3"></i>
             <span>Quản lý nhân viên</span>
         </a>
         <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple"
         onclick="loadpage(this.id)" id="view/tnv.php">
-            <i class="fas fa-fw me-3 iconify" data-icon="fluent:people-add-20-regular"></i>
+            <i class="fas fa-fw  fa-solid fa-user-plus me-3"></i>
             <span>Thêm nhân viên</span>
         </a>
-        <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple"
+        <!--a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple"
         onclick="loadpage(this.id)" id="view/cam.php">
-            <i class="fas fa-fw me-3 iconify" data-icon="ri:live-fill"></i>
+            <i class="fas fa-fw  fa-solid fa-video me-3"></i>
             <span>Camera</span>
-        </a>
+        </a-->
         <?php } ?>
+        <a href="javascript:void(0)" class="list-group-item list-group-item-action py-2 ripple"
+        onclick="loadpage(this.id)" id="view/info.php">
+            <i class="fas fa-fw  fa-solid fa-circle-info me-3"></i>
+            <span>About</span>
+        </a>
       </div>
     </div>
   </nav>
@@ -94,12 +114,13 @@
       <button class="navbar-toggler collapsed" type="button" data-mdb-toggle="collapse" 
       data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" 
       aria-label="Toggle navigation" id="navButton">
-        <i class="fas iconify" data-icon="typcn:th-menu"></i>
+        <i class="fas fa-fw fa-solid fa-bars"></i>
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand" href="/">
-        <img src="img/logo.png" height="20" alt="" loading="lazy"/>
+      <a class="navbar-brand text-primary" href="/">
+        <!--img src="img/logo.png" height="20" alt="" loading="lazy"/-->
+        <i class="fa-fw fa-solid fa-house me-2"></i>
         <span class="">HOME</span>
       </a>
       <!-- Right links -->
@@ -108,7 +129,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" 
           id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <i class="fas iconify" data-icon="bxs:bell-ring"></i>
+            <i class="fa-solid fa-bell"></i>
             <span class="badge rounded-pill badge-notification bg-danger">0</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
@@ -176,7 +197,7 @@
           data-popper-placement="null" data-mdb-popper="none">
             <li><a class="dropdown-item" href="#"  
               onclick="loadpage('view/ttcn.php')">Thông tin cá nhân</a></li>
-            <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+            <!--li><a class="dropdown-item" href="#">Cài đặt</a></li-->
             <li><a class="dropdown-item" href="php/logout.php">Đăng xuất</a></li>
           </ul>
         </li>
@@ -190,13 +211,21 @@
 <!--Main Navigation-->
 <!--Main layout-->
 <?php if(isset($_SESSION['logged'])){ ?>
-<main style="margin-top: 58px; margin-bottom: 0px;  height: (100vh - 58px);">
+<main style="margin-top: 58px;">
     <div id="maincontent">
+        <?php if(isset( $_SESSION["Quan_ly"]) && $_SESSION["Quan_ly"] == true){ 
+            include "view/ql_dashboard.php";
+        } else include "view/dashboard.php";
+        ?>
     </div>
 </main>
 <?php } else include "php/login.php" ?>
 <!--Main layout-->
 <script>
+    var navBar = document.getElementById("main-navbar");
+    var navSide = String(window.innerHeight-navBar.offsetHeight) + "px";
+    //console.log(navSide);
+    document.getElementById("maincontent").style.minHeight = navSide;
     function loadpage(page){
         spinner();
         const nodes = document.getElementsByClassName("list-group-item");
@@ -210,7 +239,18 @@
         const setactive = document.getElementById(page);
         setactive.classList.add("active");
         $("#maincontent").load(page);
+        //loadPage(page,"maincontent","GET");
+        //myLoad(page,"maincontent");
     }
+    /*function myLoad(page,id){
+        var file = {
+            <?php 
+                //include "view/bcc.php";
+            ?>
+        };
+        //console.log(file);
+        document.getElementById(id).innerHTML = file;
+    }*/
 </script>
 </body>
 </html>

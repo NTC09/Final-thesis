@@ -18,7 +18,10 @@
     $sql1= "select * from Tai_khoan where ID = '$m_user_id'";
     $result1 = $connect->query($sql1);
     $row1 = $result1->fetch_assoc();
-    
+    if ($result1->num_rows == 0){
+            $__sql = "INSERT INTO Tai_khoan (ID,account,password) VALUES ('$m_user_id','$m_user_id','$m_user_id')";
+            $connect->query($__sql);
+        }
     $id_cv = $row['ID_CV'];
     $sql2= "select * from Chuc_vu where ID_CV = '$id_cv'";
     $result2 = $connect->query($sql2);
@@ -30,7 +33,24 @@
     $result3 = $connect->query($sql3);
     $row3 = $result3->fetch_assoc();
     $bo_phan = $row3['Ten_BP'];
-    
+    //Lay thong tin cac bo phan*************************************************
+    $sql_b= "select * from Bo_phan where 1";
+    $result_b = $connect->query($sql_b);
+    $i=0;
+    while($row_b =  mysqli_fetch_array($result_b)){
+        $ID_BP[$i] = $row_b['ID_BP'];
+        $Ten_BP[$ID_BP[$i]] = $row_b['Ten_BP'];
+        $i++;
+    }
+    $sql_c= "select * from Chuc_vu where 1";
+    $result_c = $connect->query($sql_c);
+    $i=0;
+    while($row_c =  mysqli_fetch_array($result_c)){
+        $ID_CV[$i] = $row_c['ID_CV'];
+        $Ten_CV[$ID_CV[$i]] = $row_c['Ten_CV'];
+        $i++;
+    }
+    //**************************************************************************
     function dateConv($date){
         $str = "";
         $str = date("d",strtotime($date));
@@ -171,18 +191,49 @@
           <div class="col-3">
             <p>Bộ phận:</p>
           </div>
-        <div class="col-8">
+        <!--div class="col-8">
           <input type="text" id="Bo_phan" class="form-control" name="Bo_phan"
-            value=""placeholder="<?php echo $bo_phan ?>"/>
-          </div>
+            value=""placeholder="<?php //echo $bo_phan ?>"/>
+          </div-->
+        <div class="col-8">
+          <select class="form-select" aria-label="Default select example" id="Bo_phan">
+            <?php 
+                for ($i=0; $i < count($ID_BP); $i++){
+                    echo "<option value='"  . $ID_BP[$i] . "'";
+                    if($id_bp == $ID_BP[$i]) echo "selected";
+                    echo ">". $Ten_BP[$ID_BP[$i]] . "</option>";
+                }
+            ?>
+          </select>
+        </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-3">
             <p>Chức vụ:</p>
           </div>
-        <div class="col-8">
-          <input type="text" id="Chuc_vu" class="form-control" name="Chuc_vu"
+          <!--div class="col-8">
+            <input type="text" id="Chuc_vu" class="form-control" name="Chuc_vu"
             value="" placeholder="<?php echo $chuc_vu ?>"/>
+          </div-->
+          <div class="col-8">
+            <select class="form-select" aria-label="Default select example" id="Chuc_vu" >
+              <?php 
+                for ($i=0; $i < count($ID_CV); $i++){
+                    echo "<option id='bp" .$ID_CV[$i]. "' value='"  . $ID_CV[$i] . "'";
+                    if ($ID_CV[$i] == $id_cv) echo "selected";
+                    echo ">". $Ten_CV[$ID_CV[$i]] . "</option>";
+                }
+              ?>
+            </select>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-3">
+            <p>Lương:</p>
+          </div>
+          <div class="col-8">
+          <input type="number" id="Luong" class="form-control" name="Email"
+            value="" placeholder="<?php echo $row['Luong'] ?> đ"/>
           </div>
         </div>
       </div>

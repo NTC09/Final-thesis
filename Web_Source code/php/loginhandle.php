@@ -28,6 +28,14 @@
             $sql3= "select * from Phan_quyen where ID_CV = '$id_cv'";
             $result3 = $connect->query($sql3);
             
+            $sql4= "select * from So_luong_truy_cap where 1";
+            $result4 = $connect->query($sql4);
+            $row4 = $result4->fetch_assoc();
+            $count = $row4['S'];
+            $count++;
+            $sql4= "update So_luong_truy_cap set S=$count where 1";
+            $connect->query($sql4);
+            
             if ($result3->num_rows > 0){
                 $_SESSION["Quan_ly"] = true;
             }

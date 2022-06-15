@@ -7,7 +7,7 @@
     $connect = new mysqli($servername, $username, $password, $dbname);
     mysqli_set_charset($connect,"utf8");
     
-    if (session_status() === PHP_SESSION_NONE)
+    if (session_status() === PHP_SESSION_NONE && !headers_sent())
         session_start();
     
 	if (isset ($_SESSION['expire'])){

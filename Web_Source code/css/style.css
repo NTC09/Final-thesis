@@ -8,6 +8,12 @@ body {
   .myspin{
     padding-left: 280px;
   }
+  .right-line{
+    border-right: 2px solid #ccc;
+  }
+  .hh-100{
+    height:calc(100vh - 92px);
+  }
 }
 
 /* Sidebar */
@@ -40,7 +46,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
-.myspin {
+.myspin .cardSpin {
   margin-top: 29px;
   /*width: 100%;
   max-width: 0px;
@@ -50,4 +56,7 @@ body {
 }
 .form-select{
     height: 35.27px;
+}
+.hh-100{
+    min-height:calc(100vh - 92px);
 }

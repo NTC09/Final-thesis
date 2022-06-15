@@ -1,11 +1,19 @@
 <?php
     include "init.php";
 ?>
+<style>
+    .col-4{
+        max-width: 10rem;
+    }
+    .col-8{
+        max-width: 24rem;
+    }
+</style>
 <div class="p-3">
-<div class="card">
-  <h5 class="text-center p-3">Bảng chấm công</h5>
+<div class="card p-0">
+  <h5 class="text-center p-3">BẢNG CHẤM CÔNG</h5>
   <div class="row justify-content-center align-items-center">
-    <div class="col col-auto align-middle" style="-min-width: 4rem">
+    <div class="col col-auto align-middle" style="-min-width: 3rem">
       <label for="curmonth" class="control-label">Tháng:</label>
     </div>
     <div class="col col-auto">
@@ -24,17 +32,18 @@
         <option value="12">12</option>
       </select>
     </div>
-    <div class="col col-auto" style="-min-width: 3rem">
+    <div class="col col-auto" style="-min-width: 2.5rem">
       <label for="curyear" class="control-label">Năm:</label>
     </div>
-    <div class="col-1" style="min-width: 7rem">
+    <div class="col-1" style="min-width: 6.5rem">
       <div class="input-group">
         <input type="number" class="form-control" value="0" name="curyear" id="curyear" 
         onkeyup="dateSelect()" onchange="dateSelect()"/>
       </div>
     </div>
   </div>
-  <div id="myTable" class="table-responsive m-0 p-0">
+  
+  <div id="myTable">
 
   </div>
 </div>

@@ -1,6 +1,7 @@
 /*Main*/
     view_spin = "<div id='mySpin'><div class='d-flex justify-content-center'><div class='spinner-border text-primary' role='status'></div></div></div>";
     main_spin = "<div class='container myspin position-absolute top-50 start-50 translate-middle' id='mySpin'\><div class='d-flex justify-content-center'><div class='spinner-border text-primary' role='status'></div></div></div><script>var navBar = document.getElementById('main-navbar');var navSide = String((navBar.offsetHeight)/2) + 'px';document.getElementById('mySpin').style.height = navSide;</script>";
+    card_spin = "<div class='container position-absolute top-50 start-50 translate-middle' id='cardSpin'\><div class='d-flex justify-content-center'><div class='spinner-border text-primary text-center' role='status'></div></div></div><script>var navBar = document.getElementById('main-navbar');var navSide = String((navBar.offsetHeight)/2) + 'px';document.getElementById('cardSpin').style.height = navSide;</script>";
 /*Main*/
 
 /*Bang cham cong*/
