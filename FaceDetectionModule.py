@@ -24,9 +24,9 @@ class FaceDetector():
                     cv2.rectangle(img, bbox, (0, 255, 0), 2)
                 if Text == True:
                     cv2.putText(img, f'{int(detection.score[0] * 100)}%',
-                                (bbox[0], bbox[1] - 20), cv2.FONT_HERSHEY_PLAIN,
-                                2, (255, 0, 255), 2)
-        return img, bboxs
+                    (bbox[0], bbox[1] - 20), cv2.FONT_HERSHEY_PLAIN,
+                    2, (255, 0, 255), 2)
+        return bboxs
     def fancyDraw(self, img, bbox, l=30, th=1):
         x, y, w, h = bbox
         x1, y1 = x + w, y + h
